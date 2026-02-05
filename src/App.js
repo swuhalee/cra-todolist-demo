@@ -19,7 +19,8 @@ function App() {
     const response = await getTaskApi();
     setTodos(response.data.data);
   };
-  const addTask = async () => {
+  const addTask = async (e) => {
+    e.preventDefault();
     if (title.trim() === "") {
       alert("할일은 필수 입력사항입니다.");
       return;
@@ -45,27 +46,29 @@ function App() {
 
   return (
     <Container>
-      <Row className="add-item-row">
-        <Col xs={12} sm={10}>
-          <input
-            type="text"
-            placeholder="할일을 입력하세요"
-            className="input-box"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="설명을 입력하세요 (선택사항)"
-            className="input-box"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </Col>
-        <Col xs={12} sm={2}>
-          <button className="button-add" onClick={addTask}>추가</button>
-        </Col>
-      </Row>
+      <form onSubmit={addTask}>
+        <Row className="add-item-row">
+          <Col xs={12} sm={10}>
+            <input
+              type="text"
+              placeholder="할일을 입력하세요"
+              className="input-box"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="설명을 입력하세요 (선택사항)"
+              className="input-box"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </Col>
+          <Col xs={12} sm={2}>
+            <button type="submit" className="button-add">추가</button>
+          </Col>
+        </Row>
+      </form>
 
       <TodoBoard todos={todos} getTasks={getTasks} />
     </Container>
