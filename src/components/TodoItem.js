@@ -9,7 +9,7 @@ const TodoItem = ({ todo, getTasks }) => {
   };
 
   const deleteTask = async () => {
-    await deleteTaskApi(todo.id);
+    await deleteTaskApi(todo._id);
     getTasks();
   }
 
